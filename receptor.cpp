@@ -41,7 +41,7 @@ int main() {
 
   generateReceivedFrame(receivedFrame);
  
-  printf("Length: %d | CMD: %d | SA: %d\n", frame.length, frame.cmd, frame.sa);
+  printf("Length: %d | CMD: %d | SA: %d\n", receivedFrame.length, receivedFrame.cmd, receivedFrame.sa);
 }
 
 void cb(void) {
