@@ -42,11 +42,11 @@ int main() {
   generateReceivedFrame(receivedFrame);
   int temp = 0;
   int time = 0;
-  BYTE tempArr[];
-  BYTE timeArr[];
+  BYTE tempArr[4];
+  BYTE timeArr[4];
   for (int i = 0; i<4; i++) {
-    tempArr[i] = frame.data[i];
-    timeArr[i] = frame.data[i+4];
+    tempArr[i] = receivedFrame.data[i];
+    timeArr[i] = receivedFrame.data[i+4];
   }
   getIntegerOfByteArray(tempArr, &temp);
   getIntegerOfByteArray(timeArr, &time);
