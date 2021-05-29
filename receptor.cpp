@@ -39,7 +39,7 @@ int main() {
   while (nbytes < 10)
     delay(300);
 
-  generateReceivedFrame(frame);
+  generateReceivedFrame(receivedFrame);
  
   printf("Length: %d | CMD: %d | SA: %d\n", frame.length, frame.cmd, frame.sa);
 }
@@ -48,7 +48,7 @@ void cb(void) {
   bool level = digitalRead(RX_PIN);
   if (transmissionStarted) {
     processBit(level);
-  } else if (levele == 0 && !transmissionStarted) {
+  } else if (level == 0 && !transmissionStarted) {
     transmissionStarted = true;
     nbits = 1;
   }
