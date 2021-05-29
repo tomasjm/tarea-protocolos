@@ -40,8 +40,18 @@ int main() {
     delay(300);
 
   generateReceivedFrame(receivedFrame);
- 
+  int temp = 0;
+  int time = 0;
+  BYTE tempArr[];
+  BYTE timeArr[];
+  for (int i = 0; i<4; i++) {
+    tempArr[i] = frame.data[i];
+    timeArr[i] = frame.data[i+4];
+  }
+  getIntegerOfByteArray(tempArr, &temp);
+  getIntegerOfByteArray(timeArr, &time);
   printf("Length: %d | CMD: %d | SA: %d\n", receivedFrame.length, receivedFrame.cmd, receivedFrame.sa);
+  printf("Temp: %d | Time: %d\n", temp, time);
 }
 
 void cb(void) {
