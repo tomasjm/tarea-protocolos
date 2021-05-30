@@ -100,7 +100,7 @@ int main() {
   while(transmissionStarted) {
     printf("Executing cmd: %d\n", option);
     printf("nbits %d | nbytes %d | ts %d\n", nbits, nbytes, transmissionStarted);
-    delay(1000);
+    delay(10);
   }
   }
   return 0;
