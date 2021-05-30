@@ -1,5 +1,5 @@
 #include "protocol.h"
-
+#include <stdio.h>
 void generateFrameToSend(Frame &f) {
   f.frame[0] = (f.length & 0x7F) | (f.cmd & 0x1) << 7;
   f.frame[1] = (f.cmd & 0xE) >> 1 | (f.sa & 0x1F) << 3;
@@ -27,5 +27,24 @@ void getByteArrayOfInteger(int v, BYTE arr[]) {
 void getIntegerOfByteArray(BYTE arr[], int *v_ptr) {
   for (int i = 0; i< sizeof(int); i++) {
     *v_ptr |= (arr[i] << (i*8));
+  }
+}
+
+void doCmdAction(int cmd) {
+  switch (cmd) {
+    case 1:
+      printf("opcion 1\n");
+      break;
+    case 2:
+      printf("opcion 2\n");
+      break;
+    case 3:
+      printf("opcion 3\n");
+      break;
+    case 4:
+      printf("opcion 4\n");
+      break;
+    default:
+      break;
   }
 }
