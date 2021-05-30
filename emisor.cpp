@@ -59,42 +59,33 @@ int main() {
   while (true) {
   printMenu(sensorDataQuantity);
   getOptionAndValidate(&option, sensorDataQuantity);
-  switch(option) {
-    case 1:
-      int q = 100;
-      int valueArr[q];
-      int timeArr[q];
-      readSensorData(q, valueArr, timeArr);
-      sensorDataQuantity +=q;
-      break;
-    case 2: {
-      frame.cmd = 2;
-      frame.length = 8;
-      printf("no implementado \n");
-      generateFrameToSend(frame);
-      //startTransmission();
-      break;
+  if (option == 1) {    
+    int q = 100;
+    int valueArr[q];
+    int timeArr[q];
+    readSensorData(q, valueArr, timeArr);
+    sensorDataQuantity +=q;
+  } else if (option ==2 ) {
+    frame.cmd = 2;
+    frame.length = 8;
+    printf("no implementado \n");
+    generateFrameToSend(frame);
+    startTransmission();
+  } else if (option == 3) {
+    frame.cmd = 3;
+    frame.sa = 2;
+    frame.length = 0;
+    generateFrameToSend(frame);
+    printf("Sending command to calculate params ... \n");
+    startTransmission();
+    } else if (option ==4) {
+    frame.cmd = 4;
+    frame.sa = 4;
+    frame.length = 0;
+    generateFrameToSend(frame);
+    printf("Sending command to close...\n");
+    startTransmission();
     }
-    case 3: {
-      frame.cmd = 3;
-      frame.sa = 2;
-      frame.length = 0;
-      generateFrameToSend(frame);
-      printf("Sending command to calculate params ... \n");
-      //startTransmission();
-      break;
-    }
-    case 4: {
-      frame.cmd = 4;
-      frame.sa = 4;
-      frame.length = 0;
-      generateFrameToSend(frame);
-      printf("Sending command to close...\n");
-      //startTransmission();
-      break;
-    }
-    default:
-      break;
   }
   while(transmissionStarted) {
     printf("nbits %d | nbytes %d | qty %d\n", nbits, nbytes, sensorDataQuantity);
