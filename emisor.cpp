@@ -22,7 +22,7 @@ volatile int nbits = 0;
 volatile int cmd = 0;
 volatile int sa = 0;
 volatile int nbytes = 0;
-bool start = true;
+bool start = false;
 BYTE tempArr[4];
 BYTE timeArr[4];
 Frame frame;
