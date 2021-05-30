@@ -21,6 +21,6 @@ void getOptionAndValidate(int *opt_ptr, int q) {
   while(*opt_ptr < 1 || *opt_ptr > 4) {
     printMenu(q);
     printf("Please select a valid option...\n");
-    getOptionAndValidate(opt_ptr);
+    getOptionAndValidate(opt_ptr, q);
   }
 }
