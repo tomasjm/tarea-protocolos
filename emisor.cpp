@@ -57,37 +57,41 @@ int main() {
   delay(5000);
   int option = 0;
   while (true) {
-  printMenu();
+  printMenu(sensorDataQuantity);
   getOptionAndValidate(&option);
   switch(option) {
-    case 1:
+    case 1: {
       int q = 100;
       int valueArr[q];
       int timeArr[q];
       readSensorData(q, valueArr, timeArr);
       sensorDataQuantity +=q;
       break;
-    case 2:
+    }
+    case 2: {
       frame.cmd = 2;
       frame.length = 8;
       printf("no implementado \n");
-      generateFrameToSend();
+      generateFrameToSend(frame);
       startTransmission();
       break;
-    case 3:
+    }
+    case 3: {
       frame.cmd = 3;
       frame.length = 0;
-      generateFrameToSend();
+      generateFrameToSend(frame);
       printf("Sending command to calculate params ... \n");
       startTransmission();
       break;
-    case 4:
+    }
+    case 4: {
       frame.cmd = 4;
       frame.length = 0;
-      generateFrameToSend();
+      generateFrameToSend(frame);
       printf("Sending command to close...\n");
       startTransmission();
       break;
+    }
     default:
       break;
   }
