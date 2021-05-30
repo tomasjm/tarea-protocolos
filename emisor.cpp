@@ -123,6 +123,7 @@ void cb(void) {
   if (nbits == 11) {
     nbits = 0;
     nbytes++;
+    sensorDataQuantity++;
     if (nbytes == 10) {
       transmissionStarted = false;
       nbytes = 0;
