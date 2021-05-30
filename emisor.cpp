@@ -99,6 +99,7 @@ int main() {
   }
   while(transmissionStarted) {
     printf("Executing cmd: %d\n", option);
+    delay(1000);
   }
   }
   return 0;
@@ -121,11 +122,11 @@ void cb(void) {
 
   if (nbits == 11) {
     nbits = 0;
-    nbytes++;
     if (nbytes == frame.length) {
       transmissionStarted = false;
       nbytes = 0;
     }
+    nbytes++;
   }
 }
 
