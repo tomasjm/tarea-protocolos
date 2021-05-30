@@ -26,7 +26,7 @@ bool start = false;
 BYTE tempArr[4];
 BYTE timeArr[4];
 Frame frame;
-volatile int sensorDataQuantity = 0;
+int sensorDataQuantity = 0;
 
 
 int main() {
@@ -73,7 +73,7 @@ int main() {
       frame.length = 8;
       printf("no implementado \n");
       generateFrameToSend(frame);
-      startTransmission();
+      //startTransmission();
       break;
     }
     case 3: {
@@ -82,7 +82,7 @@ int main() {
       frame.length = 0;
       generateFrameToSend(frame);
       printf("Sending command to calculate params ... \n");
-      startTransmission();
+      //startTransmission();
       break;
     }
     case 4: {
@@ -91,7 +91,7 @@ int main() {
       frame.length = 0;
       generateFrameToSend(frame);
       printf("Sending command to close...\n");
-      startTransmission();
+      //startTransmission();
       break;
     }
     default:
