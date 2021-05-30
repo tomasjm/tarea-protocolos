@@ -6,6 +6,9 @@ void generateFrameToSend(Frame &f) {
   for (int i = 0; i<f.length; i++) {
     f.frame[2+i] = f.data[i];
   }
+  for (int i = f.length; i<129; i++) {
+    f.frame[2+i] = 0;
+  }
 }
 
 void generateReceivedFrame(Frame &f) {
