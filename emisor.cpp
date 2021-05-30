@@ -60,14 +60,13 @@ int main() {
   printMenu(sensorDataQuantity);
   getOptionAndValidate(&option, sensorDataQuantity);
   switch(option) {
-    case 1: {
+    case 1:
       int q = 100;
       int valueArr[q];
       int timeArr[q];
       readSensorData(q, valueArr, timeArr);
       sensorDataQuantity +=q;
       break;
-    }
     case 2: {
       frame.cmd = 2;
       frame.length = 8;
