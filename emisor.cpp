@@ -123,14 +123,11 @@ void cb(void) {
 
   if (nbits == 11) {
     nbits = 0;
-    printf("NOXD\n");
-    if (nbytes == frame.length) {
-      printf("XD\n");
+    if (nbytes == frame.length+2) {
       transmissionStarted = false;
       nbytes = 0;
       return;
     }
-    printf("SUPERXD\n");
     nbytes++;
   }
 }
