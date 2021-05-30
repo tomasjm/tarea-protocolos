@@ -36,7 +36,7 @@ int main() {
     printf("Unable to start interrupt function\n");
   }
 
-  while (nbytes < 129)
+  while (nbytes < 10)
     delay(10);
 
   generateReceivedFrame(receivedFrame);

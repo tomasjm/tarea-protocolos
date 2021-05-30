@@ -97,8 +97,10 @@ int main() {
     default:
       break;
   }
-  while(transmissionStarted)
-    continue;
+  while(transmissionStarted) {
+    printf("nbits %d | nbytes %d \n");
+    delay(100);
+  }
   }
   return 0;
 }
@@ -121,7 +123,7 @@ void cb(void) {
   if (nbits == 11) {
     nbits = 0;
     nbytes++;
-    if (nbytes == 129) {
+    if (nbytes == 10) {
       transmissionStarted = false;
       nbytes = 0;
       return;
