@@ -98,7 +98,7 @@ int main() {
       break;
   }
   while(transmissionStarted) {
-    printf("nbits %d | nbytes %d \n", nbits, nbytes);
+    printf("nbits %d | nbytes %d | qty %d\n", nbits, nbytes, sensorDataQuantity);
     delay(100);
   }
   }
