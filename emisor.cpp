@@ -26,7 +26,7 @@ bool start = false;
 BYTE tempArr[4];
 BYTE timeArr[4];
 Frame frame;
-int sensorDataQuantity = 0;
+volatile int sensorDataQuantity = 0;
 
 
 int main() {
