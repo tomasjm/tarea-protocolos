@@ -99,6 +99,7 @@ int main() {
   }
   while(transmissionStarted) {
     printf("Executing cmd: %d\n", option);
+    printf("nbits %d | nbytes %d | ts %d\n", nbits, nbytes, transmissionStarted);
     delay(1000);
   }
   }
@@ -122,10 +123,14 @@ void cb(void) {
 
   if (nbits == 11) {
     nbits = 0;
+    printf("NOXD\n");
     if (nbytes == frame.length) {
+      printf("XD\n");
       transmissionStarted = false;
       nbytes = 0;
+      return;
     }
+    printf("SUPERXD\n");
     nbytes++;
   }
 }
