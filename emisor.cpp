@@ -78,6 +78,7 @@ int main() {
     }
     case 3: {
       frame.cmd = 3;
+      frame.sa = 2;
       frame.length = 0;
       generateFrameToSend(frame);
       printf("Sending command to calculate params ... \n");
@@ -86,6 +87,7 @@ int main() {
     }
     case 4: {
       frame.cmd = 4;
+      frame.sa = 4;
       frame.length = 0;
       generateFrameToSend(frame);
       printf("Sending command to close...\n");
