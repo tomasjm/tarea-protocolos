@@ -97,11 +97,8 @@ int main() {
     default:
       break;
   }
-  while(transmissionStarted) {
-    printf("Executing cmd: %d\n", option);
-    printf("nbits %d | nbytes %d | ts %d\n", nbits, nbytes, transmissionStarted);
-    delay(10);
-  }
+  while(transmissionStarted)
+    continue;
   }
   return 0;
 }
