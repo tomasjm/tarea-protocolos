@@ -98,7 +98,7 @@ int main() {
       break;
   }
   while(transmissionStarted) {
-    printf("nbits %d | nbytes %d \n");
+    printf("nbits %d | nbytes %d \n", nbits, nbytes);
     delay(100);
   }
   }
