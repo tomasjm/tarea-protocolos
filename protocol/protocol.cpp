@@ -30,21 +30,3 @@ void getIntegerOfByteArray(BYTE arr[], int *v_ptr) {
   }
 }
 
-void doCmdAction(int cmd) {
-  switch (cmd) {
-    case 1:
-      printf("opcion 1\n");
-      break;
-    case 2:
-      printf("opcion 2\n");
-      break;
-    case 3:
-      printf("opcion 3\n");
-      break;
-    case 4:
-      printf("opcion 4\n");
-      break;
-    default:
-      break;
-  }
-}

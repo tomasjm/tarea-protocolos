@@ -6,10 +6,10 @@ void clearScreen() {
   system("clear");
 }
 
-void printMenu() {
+void printMenu(int q) {
   clearScreen();
   printf("Main menu\n");
-  printf("Please select an option. Currently we have %d values of temperature\n", 1);
+  printf("Please select an option. Currently we have %d values of temperature\n", q);
   printf("1. Get 100 values of temperature from the sensor\n");
   printf("2. Send values of temperature to receptor\n");
   printf("3. Calculate parameters of the values from the receptor\n");

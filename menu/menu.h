@@ -1,3 +1,3 @@
-void printMenu();
+void clearScreen();
+void printMenu(int q);
 void getOptionAndValidate(int *opt_ptr);
-

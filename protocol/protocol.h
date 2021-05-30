@@ -18,4 +18,3 @@ void getByteArrayOfInteger(int v, BYTE arr[]);
 
 void getIntegerOfByteArray(BYTE arr[], int *v_ptr);
 
-void doCmdAction(int cmd);

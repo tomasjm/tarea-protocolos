@@ -4,6 +4,7 @@
 
 #include "helpers/helpers.h"
 #include "protocol/protocol.h"
+#include "menu/menu.h"
 
 #define CLOCK_PIN 0
 #define TX_PIN 2
@@ -13,6 +14,8 @@
 
 void cb(void);
 void startTransmission();
+void getSensorData();
+
 
 bool transmissionStarted = false;
 volatile int nbits = 0;
@@ -23,6 +26,9 @@ bool start = true;
 BYTE tempArr[4];
 BYTE timeArr[4];
 Frame frame;
+int sensorDataQuantity = 0;
+
+
 int main() {
   if (start) {
     start = false;
@@ -48,12 +54,47 @@ int main() {
 
   pinMode(RX_PIN, INPUT);
   pinMode(TX_PIN, OUTPUT);
-
   delay(5000);
-
-  startTransmission();
-  while(transmissionStarted)
-    delay(2000);
+  int option = 0;
+  while (true) {
+  printMenu();
+  getOptionAndValidate(&option);
+  switch(option) {
+    case 1:
+      int q = 100;
+      int valueArr[q];
+      int timeArr[q];
+      readSensorData(q, valueArr, timeArr);
+      sensorDataQuantity +=q;
+      break;
+    case 2:
+      frame.cmd = 2;
+      frame.length = 8;
+      printf("no implementado \n");
+      generateFrameToSend();
+      startTransmission();
+      break;
+    case 3:
+      frame.cmd = 3;
+      frame.length = 0;
+      generateFrameToSend();
+      printf("Sending command to calculate params ... \n");
+      startTransmission();
+      break;
+    case 4:
+      frame.cmd = 4;
+      frame.length = 0;
+      generateFrameToSend();
+      printf("Sending command to close...\n");
+      startTransmission();
+      break;
+    default:
+      break;
+  }
+  while(transmissionStarted) {
+    printf("Executing cmd: %d\n", option);
+  }
+  }
   return 0;
 }
 
@@ -75,7 +116,7 @@ void cb(void) {
   if (nbits == 11) {
     nbits = 0;
     nbytes++;
-    if (nbytes == 10) {
+    if (nbytes == frame.length) {
       transmissionStarted = false;
       nbytes = 0;
     }
@@ -85,4 +126,3 @@ void cb(void) {
 void startTransmission() {
   transmissionStarted = true;
 }
-
