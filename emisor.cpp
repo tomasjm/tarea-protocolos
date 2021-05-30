@@ -26,7 +26,7 @@ bool start = false;
 BYTE tempArr[4];
 BYTE timeArr[4];
 Frame frame;
-extern int sensorDataQuantity;
+extern int sensorDataQuantity = 1;
 
 
 int main() {
