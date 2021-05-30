@@ -16,10 +16,10 @@ void printMenu(int q) {
   printf("4. Close receptor\n");
 }
 
-void getOptionAndValidate(int *opt_ptr) {
+void getOptionAndValidate(int *opt_ptr, int q) {
   scanf("%d", opt_ptr);
   while(*opt_ptr < 1 || *opt_ptr > 4) {
-    printMenu();
+    printMenu(q);
     printf("Please select a valid option...\n");
     getOptionAndValidate(opt_ptr);
   }

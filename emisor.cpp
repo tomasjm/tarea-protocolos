@@ -58,7 +58,7 @@ int main() {
   int option = 0;
   while (true) {
   printMenu(sensorDataQuantity);
-  getOptionAndValidate(&option);
+  getOptionAndValidate(&option, sensorDataQuantity);
   switch(option) {
     case 1: {
       int q = 100;
