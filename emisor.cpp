@@ -123,12 +123,12 @@ void cb(void) {
 
   if (nbits == 11) {
     nbits = 0;
+    nbytes++;
     if (nbytes == frame.length+2) {
       transmissionStarted = false;
       nbytes = 0;
       return;
     }
-    nbytes++;
   }
 }
 
