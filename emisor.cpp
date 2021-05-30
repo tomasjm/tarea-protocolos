@@ -126,7 +126,6 @@ void cb(void) {
     if (nbytes == 10) {
       transmissionStarted = false;
       nbytes = 0;
-      return;
     }
   }
 }
