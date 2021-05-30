@@ -26,7 +26,7 @@ bool start = false;
 BYTE tempArr[4];
 BYTE timeArr[4];
 Frame frame;
-int sensorDataQuantity = 0;
+int sensorDataQuantity;
 
 
 int main() {
@@ -112,7 +112,6 @@ void cb(void) {
   if (nbits == 11) {
     nbits = 0;
     nbytes++;
-    sensorDataQuantity++;
     if (nbytes == 10) {
       transmissionStarted = false;
       nbytes = 0;
