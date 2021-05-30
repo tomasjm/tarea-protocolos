@@ -85,7 +85,6 @@ int main() {
     generateFrameToSend(frame);
     printf("Sending command to close...\n");
     startTransmission();
-    }
   }
   while(transmissionStarted) {
     printf("nbits %d | nbytes %d | qty %d\n", nbits, nbytes, sensorDataQuantity);
