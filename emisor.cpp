@@ -29,7 +29,7 @@ BYTE timeByteArr[4];
 int tempArr[100];
 int timeArr[100];
 Frame frame;
-extern int sensorDataQuantity = 0;
+volatile int sensorDataQuantity = 0;
 extern int q = 5;
 
 int main() {

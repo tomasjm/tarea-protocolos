@@ -10,11 +10,7 @@ void printMenu(int q, int maxQty) {
   clearScreen();
   printf("Main menu\n");
   printf("Please select an option. Currently we have %d values of temperature\n", q);
-  if (q == maxQty) {
-    printf("1. Get %d values of temperature from the sensor\n", maxQty);
-  } else {
-    printf("1. Get %d new values of temperature from the sensor \n", maxQty);
-  }
+  printf("1. Get %d new values of temperature from the sensor \n", maxQty);
   printf("2. Send values of temperature to receptor\n");
   printf("3. Calculate parameters of the values from the receptor\n");
   printf("4. Close receptor\n");
