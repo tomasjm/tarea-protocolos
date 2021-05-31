@@ -20,7 +20,10 @@ volatile int nbytes = 0;
 bool transmissionStarted =false;
 bool start = true; 
 Frame receivedFrame;
-
+int tempArr[100];
+int timeArr[100];
+BYTE tempByteArr[4];
+BYTE timeByteArr[4];
 
 int main() {
   if (start) {
@@ -35,23 +38,34 @@ int main() {
   if (wiringPiISR(CLOCK_PIN, INT_EDGE_RISING, &cb) < 0) {
     printf("Unable to start interrupt function\n");
   }
-
+  
   while (nbytes < 10)
     delay(10);
 
   generateReceivedFrame(receivedFrame);
-  int temp = 0;
-  int time = 0;
-  BYTE tempArr[4];
-  BYTE timeArr[4];
-  for (int i = 0; i<4; i++) {
-    tempArr[i] = receivedFrame.data[i];
-    timeArr[i] = receivedFrame.data[i+4];
+  if (receivedFrame.cmd == 4) {
+    printf("Closing...\n");
+    exit(1);
+  } else if (receivedFrame.cmd = 2) {
+    int i = 0;
+    while (i<5) {
+      for (int j = 0; j<4;j++) {
+        tempByteArr[j] = frame.data[j];
+        timeByteArr[j] = frame.data[j+4];
+      }
+      int temp = 0;
+      int time = 0;
+      getIntegerOfByteArr(tempByteArr, &temp);
+      getIntegerOfByteArr(timeByteArr, &time);
+      tempArr[i] = temp;
+      timeArr[i] = time;
+      while(transmissionStarted) {
+        delay(10);
+      }
+      printf("Se han capturado %d datos\n", i);
+      i++;
+    }
   }
-  getIntegerOfByteArray(tempArr, &temp);
-  getIntegerOfByteArray(timeArr, &time);
-  printf("Length: %d | CMD: %d | SA: %d\n", receivedFrame.length, receivedFrame.cmd, receivedFrame.sa);
-  printf("Temp: %d | Time: %d\n", temp, time);
 }
 
 void cb(void) {
