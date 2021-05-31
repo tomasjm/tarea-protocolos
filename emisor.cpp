@@ -1,6 +1,7 @@
 #include <wiringPi.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "helpers/helpers.h"
 #include "protocol/protocol.h"
@@ -44,50 +45,51 @@ int main() {
   delay(5000);
   int option = 0;
   while (true) {
-  printMenu(sensorDataQuantity, q);
-  getOptionAndValidate(&option, sensorDataQuantity, q);
-  if (option == 1) {    
-    readSensorData(q,tempArr, timeArr);
-    sensorDataQuantity +=q;
-  } else if (option ==2 ) {
-    frame.cmd = 2;
-    frame.length = 8;
-    int i = 0;
-    while (i<q) {
-      getByteArrayOfInteger(tempArr[i], tempByteArr);
-      getByteArrayOfInteger(timeArr[i], timeByteArr);
-      for (int i = 0; i<4; i++) {
-        frame.data[i]=tempByteArr[i];
-        frame.data[i+4]=timeByteArr[i];
-      }
-      generateFrameToSend(frame);
-      startTransmission();
-      while(transmissionStarted) {
-        printf("Enviando datos. Cant enviada: %d\n", i);
+    printMenu(sensorDataQuantity, q);
+    getOptionAndValidate(&option, sensorDataQuantity, q);
+    if (option == 1) {    
+      readSensorData(q,tempArr, timeArr);
+      sensorDataQuantity +=q;
+    } else if (option ==2 ) {
+      frame.cmd = 2;
+      frame.length = 8;
+      int i = 0;
+      while (i<q) {
+        getByteArrayOfInteger(tempArr[i], tempByteArr);
+        getByteArrayOfInteger(timeArr[i], timeByteArr);
+        for (int i = 0; i<4; i++) {
+          frame.data[i]=tempByteArr[i];
+          frame.data[i+4]=timeByteArr[i];
+        }
+        generateFrameToSend(frame);
+        startTransmission();
+        while(transmissionStarted) {
+          printf("Enviando datos. Cant enviada: %d\n", i);
+          delay(1000);
+        }
+        i++;
         delay(1000);
       }
-      i++;
-      delay(1000);
-    }
-  } else if (option == 3) {
-    frame.cmd = 3;
-    frame.sa = 2;
-    frame.length = 0;
-    generateFrameToSend(frame);
-    printf("Sending command to calculate params ... \n");
-    startTransmission();
+    } else if (option == 3) {
+      frame.cmd = 3;
+      frame.sa = 2;
+      frame.length = 0;
+      generateFrameToSend(frame);
+      printf("Sending command to calculate params ... \n");
+      startTransmission();
     } else if (option ==4) {
-    frame.cmd = 4;
-    frame.sa = 4;
-    frame.length = 0;
-    generateFrameToSend(frame);
-    printf("Sending command to close...\n");
-    startTransmission();
-  }
-  while(transmissionStarted) {
-    printf("nbits %d | nbytes %d | qty %d\n", nbits, nbytes, sensorDataQuantity);
-    delay(100);
-  }
+      frame.cmd = 4;
+      frame.sa = 4;
+      frame.length = 0;
+      generateFrameToSend(frame);
+      printf("Sending command to close...\n");
+      startTransmission();
+    }
+    while(transmissionStarted) {
+      printf("Sending data ...\n");
+      delay(100);
+    }
+    memset(&frame, 0, sizeof(frame));
   }
   return 0;
 }

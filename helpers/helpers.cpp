@@ -16,6 +16,7 @@ void readSensorData(int q, int valuesArr[], int timesArr[]) {
   valuesArr[i] = rawTemp;
   timesArr[i] = time(NULL);
   printf("Se han tomado %d datos de %d\n", i+1, q);
+  printf("Temp %d\n", rawTemp);
   pclose(fp);
   }
 }

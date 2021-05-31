@@ -58,6 +58,7 @@ int main() {
       tempArr[dataQty] = temp;
       timeArr[dataQty] = time;
       dataQty+=1;
+      printf("Temp %d|n", temp);
       printf("Se han capturado %d datos\n", dataQty);
     }
   memset(&receivedFrame, 0, sizeof(receivedFrame));
