@@ -29,7 +29,7 @@ int tempArr[100];
 int timeArr[100];
 Frame frame;
 extern int sensorDataQuantity = 0;
-extern int q = 100;
+extern int q = 5;
 
 int main() {
   if (wiringPiSetup() == -1)
@@ -44,8 +44,8 @@ int main() {
   delay(5000);
   int option = 0;
   while (true) {
-  printMenu(sensorDataQuantity);
-  getOptionAndValidate(&option, sensorDataQuantity);
+  printMenu(sensorDataQuantity, q);
+  getOptionAndValidate(&option, sensorDataQuantity, q);
   if (option == 1) {    
     readSensorData(q,tempArr, timeArr);
     sensorDataQuantity +=q;
