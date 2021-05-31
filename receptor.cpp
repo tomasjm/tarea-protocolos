@@ -57,9 +57,6 @@ int main() {
       timeArr[dataQty] = time;
       printf("Se han capturado %d datos\n", dataQty);
     }
-    receivedFrame.cmd = NULL;
-    receivedFrame.length = NULL;
-    receivedFrame.data = NULL;
     nbytes = 0;
   }
 }
