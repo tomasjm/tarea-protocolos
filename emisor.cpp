@@ -66,6 +66,8 @@ int main() {
         printf("Enviando datos. Cant enviada: %d\n", i);
         delay(1000);
       }
+      i++;
+      delay(1000);
     }
   } else if (option == 3) {
     frame.cmd = 3;
