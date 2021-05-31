@@ -31,7 +31,7 @@ int timeArr[100];
 Frame frame;
 volatile int sensorDataQuantity = 0;
 extern int q = 5;
-
+int nones = 0;
 int main() {
   if (wiringPiSetup() == -1)
     exit(1);
@@ -103,7 +103,10 @@ void cb(void) {
   if (nbits < 9 && nbits != 0)
     digitalWrite(TX_PIN, (frame.frame[nbytes] >> (nbits-1)&0x1));
   if (nbits == 9) {
-    // calcular bit paridad
+    nones = (bytes[nbytes]&0x01) + ((bytes[nbytes]&0x02)>>1) + ((bytes[nbytes]&0x04)>>2) + 
+      ((bytes[nbytes]&0x08)>>3) + ((bytes[nbytes]&0x10)>>4) + ((bytes[nbytes]&0x20)>>5) + 
+      ((bytes[nbytes]&0x40)>>6) + ((bytes[nbytes]&0x80)>>7);
+    digitalWrite(TX_PIN, nones%2==0); 
   }
   if (nbits > 9)
     digitalWrite(TX_PIN, 1);

@@ -29,6 +29,9 @@ int maxTemp = 0;
 int medianTemp = 0;
 int minTemp = 0;
 
+bool parityError = 0;
+int errorCount = 0;
+
 int main() {
   if (wiringPiSetup() == -1)
     exit(1);
@@ -41,14 +44,22 @@ int main() {
   }
   while (true) {
     while (nbytes < 10) {
-      printf("nbytes %d\n", nbytes);
-      delay(1000);
+      if (!transmissionStarted)
+        printf("Waiting data ...\n");
+      else
+        printf("Receiving data ...\n")
+          delay(1000);
     }
     generateReceivedFrame(receivedFrame);
     if (receivedFrame.cmd == 4) {
       printf("Closing...\n");
       exit(1);
     } else if (receivedFrame.cmd == 2) {
+      if (parityError) {
+        errorCount++;
+        printf("An error was detected so message is ignored ...\n");
+        continue;
+      }
       for (int j = 0; j<4;j++) {
         tempByteArr[j] = receivedFrame.data[j];
         timeByteArr[j] = receivedFrame.data[j+4];
@@ -73,12 +84,13 @@ int main() {
         sum += tempArr[i];
       }
       medianTemp = sum/dataQty;
-      printf("Max Temp &d | Min Temp %d | Median Temp %d \n", maxTemp, minTemp, medianTemp );
+      printf("Max Temp %d | Min Temp %d | Median Temp %d \n", maxTemp, minTemp, medianTemp );
     } else if (receivedFrame.cmd == 3) {
-
+      printf("Received messages %d | Errors found %d \n", dataQty, errorCount);
+      printf("Max Temp %d | Min Temp %d | Median Temp %d \n", maxTemp, minTemp, medianTemp );
     }
-  memset(&receivedFrame, 0, sizeof(receivedFrame));
-  nbytes = 0;
+    memset(&receivedFrame, 0, sizeof(receivedFrame));
+    nbytes = 0;
   }
 }
 
@@ -97,6 +109,13 @@ void processBit(bool level) {
     receivedFrame.frame[nbytes] |= level << (nbits-1);
   } else if (nbits == 9) {
     // check paridad
+    parity = level;
+    nones = (bytes[nbytes]&0x01) + ((bytes[nbytes]&0x02)>>1) + ((bytes[nbytes]&0x04)>>2) + ((bytes[nbytes]&0x08)>>3)
+      + ((bytes[nbytes]&0x10)>>4) + ((bytes[nbytes]&0x20)>>5) + ((bytes[nbytes]&0x40)>>6) + ((bytes[nbytes]&0x80)>>7);
+    if(parity != (nones%2==0)){
+      parityError = true;
+    }
+
     nbytes++;
     transmissionStarted =false;
   }
