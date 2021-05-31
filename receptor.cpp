@@ -60,7 +60,7 @@ int main() {
       dataQty+=1;
       printf("Se han capturado %d datos\n", dataQty);
     }
-  memset(&frame, 0, sizeof(frame));
+  memset(&receivedFrame, 0, sizeof(receivedFrame));
   nbytes = 0;
   }
 }
