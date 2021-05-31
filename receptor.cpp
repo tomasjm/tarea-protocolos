@@ -25,7 +25,9 @@ int timeArr[100];
 BYTE tempByteArr[4];
 BYTE timeByteArr[4];
 extern int dataQty = 0;
-
+int maxTemp = 0;
+int medianTemp = 0;
+int minTemp = 0;
 
 int main() {
   if (wiringPiSetup() == -1)
@@ -60,6 +62,20 @@ int main() {
       dataQty+=1;
       printf("Temp %d\n", temp);
       printf("Se han capturado %d datos\n", dataQty);
+      int sum = 0;
+      for (int i=0; i<dataQty; i++) {
+        if (i == 0)
+          minTemp = tempArr[i];
+        if (tempArr[i] > maxTemp)
+          maxTemp = tempArr[i];
+        if (tempArr[i] < minTemp)
+          minTemp =tempArr[i];
+        sum += tempArr[i];
+      }
+      medianTemp = sum/dataQty;
+      printf("Max Temp &d | Min Temp %d | Median Temp %d \n", maxTemp, minTemp, medianTemp );
+    } else if (receivedFrame.cmd == 3) {
+
     }
   memset(&receivedFrame, 0, sizeof(receivedFrame));
   nbytes = 0;
