@@ -55,8 +55,8 @@ int main() {
     int time = 0;
     getIntegerOfByteArray(tempByteArr, &temp);
     getIntegerOfByteArray(timeByteArr, &time);
-    tempArr[i] = temp;
-    timeArr[i] = time;
+    tempArr[dataQty] = temp;
+    timeArr[dataQty] = time;
     printf("Se han capturado %d datos\n", i);
   }
   nbytes = 0;
