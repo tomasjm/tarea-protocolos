@@ -23,28 +23,15 @@ volatile int cmd = 0;
 volatile int sa = 0;
 volatile int nbytes = 0;
 bool start = false;
-BYTE tempArr[4];
-BYTE timeArr[4];
+BYTE tempByteArr[4];
+BYTE timeByteArr[4];
+int tempArr[100];
+int timeArr[100];
 Frame frame;
-extern int sensorDataQuantity = 1;
-
+extern int sensorDataQuantity = 0;
+extern int q = 100;
 
 int main() {
-  if (start) {
-    start = false;
-    int tempTestValue = 5555;
-    int timeTestValue = 19123456;
-    getByteArrayOfInteger(tempTestValue, tempArr);
-    getByteArrayOfInteger(timeTestValue, timeArr);
-    frame.cmd = 7;
-    frame.length = 8;
-    for (int i = 0; i<4; i++) {
-      frame.data[i] = tempArr[i];
-      frame.data[i+4] = timeArr[i]; 
-    }
-    generateFrameToSend(frame);
-
-  }
   if (wiringPiSetup() == -1)
     exit(1);
 
@@ -60,17 +47,26 @@ int main() {
   printMenu(sensorDataQuantity);
   getOptionAndValidate(&option, sensorDataQuantity);
   if (option == 1) {    
-    int q = 100;
-    int valueArr[q];
-    int timeArr[q];
-    readSensorData(q, valueArr, timeArr);
+    readSensorData(q,tempArr, timeArr);
     sensorDataQuantity +=q;
   } else if (option ==2 ) {
     frame.cmd = 2;
     frame.length = 8;
-    printf("no implementado \n");
-    generateFrameToSend(frame);
-    startTransmission();
+    int i = 0;
+    while (i<q) {
+      getByteArrayOfInteger(tempArr[i], tempByteArr);
+      getByteArrayOfInteger(timeArr[i], timeByteArr);
+      for (int i = 0; i<4; i++) {
+        frame.data[i]=tempByteArr[i];
+        frame.data[i+4]=timeByteArr[i];
+      }
+      generateFrameToSend(frame);
+      startTransmission();
+      while(transmissionStarted) {
+        printf("Enviando datos. Cant enviada: %d\n", i);
+        delay(1000);
+      }
+    }
   } else if (option == 3) {
     frame.cmd = 3;
     frame.sa = 2;
