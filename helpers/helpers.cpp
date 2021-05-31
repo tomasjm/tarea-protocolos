@@ -1,4 +1,5 @@
 #include <time.h>
+#include <stdio.h>
 #include "helpers.h"
 
 void cDelay(int milliSeconds) {
@@ -12,8 +13,8 @@ void readSensorData(int q, int valuesArr[], int timesArr[]) {
   for (int i = 0; i<q; i++) {
   fp = popen("cat /sys/bus/w1/devices/28-0113126a6baa/w1_slave | grep -i -o \"t=[0-9]*\" | grep -o \n[0-9]*\"", "r");
   fscanf(fp, "%d", &rawTemp);
-  valuesArr[i] = temperature;
+  valuesArr[i] = rawTemp;
   timesArr[i] = time(NULL);
-  pcllose(fp);
+  pclose(fp);
   }
 }
