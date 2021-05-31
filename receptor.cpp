@@ -37,8 +37,8 @@ int main() {
   }
   while (true) {
     while (nbytes < 10) {
-      printf("nbytes %d", nbytes);
-      delay(10);
+      printf("nbytes %d\n", nbytes);
+      delay(1000);
     }
     generateReceivedFrame(receivedFrame);
     if (receivedFrame.cmd == 4) {
