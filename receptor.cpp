@@ -25,7 +25,8 @@ int timeArr[100];
 BYTE tempByteArr[4];
 BYTE timeByteArr[4];
 extern int dataQty = 0;
-static const struct Frame emptyFrame;
+
+
 int main() {
   if (wiringPiSetup() == -1)
     exit(1);
@@ -59,8 +60,8 @@ int main() {
       dataQty+=1;
       printf("Se han capturado %d datos\n", dataQty);
     }
-    receivedFrame = emptyFrame;
-    nbytes = 0;
+  memset(&frame, 0, sizeof(frame));
+  nbytes = 0;
   }
 }
 
