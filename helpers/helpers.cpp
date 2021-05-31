@@ -11,7 +11,7 @@ void readSensorData(int q, int valuesArr[], int timesArr[]) {
   FILE *fp;
   int rawTemp;
   for (int i = 0; i<q; i++) {
-  fp = popen("cat /sys/bus/w1/devices/28-0113126a6baa/w1_slave | grep -i -o \"t=[0-9]*\" | grep -o \n[0-9]*\"", "r");
+  fp = popen("cat /sys/bus/w1/devices/28-0113126a6baa/w1_slave | grep -i -o \"t=[0-9]*\" | grep -o \"[0-9]*\"", "r");
   fscanf(fp, "%d", &rawTemp);
   valuesArr[i] = rawTemp;
   timesArr[i] = time(NULL);
