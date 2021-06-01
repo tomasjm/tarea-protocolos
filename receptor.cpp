@@ -24,6 +24,7 @@ float tempArr[100];
 int timeArr[100];
 BYTE tempByteArr[4];
 BYTE timeByteArr[4];
+extern int cmdReceived = 0;
 extern int dataQty = 0;
 float maxTemp = 0;
 float medianTemp = 0;
@@ -52,6 +53,7 @@ int main() {
         printf("Receiving data ...\n");
       delay(1000);
     }
+    cmdReceived++;
     if (parityError) {
       printf("An error was detected so ignoring message ...\n");
       parityError = false;
@@ -91,7 +93,7 @@ int main() {
       medianTemp = sum/dataQty;
       printf("Max Temp %.2f | Min Temp %.2f | Median Temp %.2f \n", maxTemp, minTemp, medianTemp );
     } else if (receivedFrame.cmd == 3) {
-      printf("Received messages %d | Errors found %d \n", dataQty, errorCount);
+      printf("Total messages received: %d | Errors found: %d | Received temp data %d\n",cmdReceived, errorCount, dataQtyy);
       printf("Max Temp %.2f | Min Temp %.2f | Median Temp %.2f \n", maxTemp, minTemp, medianTemp );
     }
     memset(&receivedFrame, 0, sizeof(receivedFrame));

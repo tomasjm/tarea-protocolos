@@ -91,6 +91,10 @@ int main() {
     }
     if (frame.cmd == 4)
       exit(1);
+    if (frame.cmd == 2) {
+      memset(tempArr, 0, sizeof(tempArr));
+      memset(timeArr, 0, sizeof(timeArr));
+    }
     memset(&frame, 0, sizeof(frame));
   }
   return 0;
