@@ -29,7 +29,7 @@ BYTE timeByteArr[4];
 int tempArr[100];
 int timeArr[100];
 Frame frame;
-int sensorDataQuantity[1] = {0};
+extern int sensorDataQuantity[1] = {0};
 extern int q = 5;
 int nones = 0;
 int main() {
