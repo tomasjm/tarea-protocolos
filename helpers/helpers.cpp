@@ -15,8 +15,8 @@ void readSensorData(int q, int valuesArr[], int timesArr[]) {
   fscanf(fp, "%d", &rawTemp);
   valuesArr[i] = rawTemp+10000;
   timesArr[i] = time(NULL);
-  printf("Se han tomado %d datos de %d\n", i+1, q);
-  printf("Temp %d\n", rawTemp);
+  printf("Got %d temperature values of %d\n", i+1, q);
+  printf("Raw temperature value %d\n", rawTemp);
   pclose(fp);
   }
 }

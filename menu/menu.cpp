@@ -16,11 +16,11 @@ void printMenu(int q, int maxQty) {
   printf("4. Close receptor\n");
 }
 
-void getOptionAndValidate(int *opt_ptr, int q, int maxQty) {
-  scanf("%d", opt_ptr);
-  while(*opt_ptr < 1 || *opt_ptr > 4) {
+void getOptionAndValidate(int *optPtr, int q, int maxQty) {
+  scanf("%d", optPtr);
+  while(*optPtr < 1 || *optPtr > 4) {
     printMenu(q, maxQty);
     printf("Please select a valid option...\n");
-    getOptionAndValidate(opt_ptr, q, maxQty);
+    getOptionAndValidate(optPtr, q, maxQty);
   }
 }

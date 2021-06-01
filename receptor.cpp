@@ -78,8 +78,7 @@ int main() {
       tempArr[dataQty] = ((float)temp-10000)/1000;
       timeArr[dataQty] = time;
       dataQty+=1;
-      printf("Temp %.2f\n", tempArr[dataQty]);
-      printf("Se han capturado %d datos\n", dataQty);
+      printf("Received %d values of temperature with it timestamp\n", dataQty);
       float sum = 0;
       for (int i=0; i<dataQty; i++) {
         if (i == 0)
@@ -93,7 +92,7 @@ int main() {
       medianTemp = sum/dataQty;
       printf("Max Temp %.2f | Min Temp %.2f | Median Temp %.2f \n", maxTemp, minTemp, medianTemp );
     } else if (receivedFrame.cmd == 3) {
-      printf("Total messages received: %d | Errors found: %d | Received temp data %d\n",cmdReceived, errorCount, dataQty);
+      printf("Total messages received (CMDs): %d | Errors found: %d | Received temp data %d\n",cmdReceived, errorCount, dataQty);
       printf("Max Temp %.2f | Min Temp %.2f | Median Temp %.2f \n", maxTemp, minTemp, medianTemp );
     }
     memset(&receivedFrame, 0, sizeof(receivedFrame));

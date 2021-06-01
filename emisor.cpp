@@ -42,7 +42,7 @@ int main() {
 
   pinMode(RX_PIN, INPUT);
   pinMode(TX_PIN, OUTPUT);
-  delay(5000);
+  delay(2000);
   int option = 0;
   while (true) {
     printMenu(sensorDataQuantity[0], q);
@@ -64,7 +64,7 @@ int main() {
         generateFrameToSend(frame);
         startTransmission();
         while(transmissionStarted) {
-          printf("Enviando datos. Cant enviada: %d\n", i);
+          printf("Sending data. Sent values: %d\n", i);
           delay(1000);
         }
         i++;
@@ -87,7 +87,7 @@ int main() {
     }
     while(transmissionStarted) {
       printf("Sending data ...\n");
-      delay(100);
+      delay(1000);
     }
     if (frame.cmd == 4)
       exit(1);

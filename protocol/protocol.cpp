@@ -27,9 +27,9 @@ void getByteArrayOfInteger(int v, BYTE arr[]) {
   }
 }
 
-void getIntegerOfByteArray(BYTE arr[], int *v_ptr) {
+void getIntegerOfByteArray(BYTE arr[], int *vPtr) {
   for (int i = 0; i< sizeof(int); i++) {
-    *v_ptr |= (arr[i] << (i*8));
+    *vPtr |= (arr[i] << (i*8));
   }
 }
 
