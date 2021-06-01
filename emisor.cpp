@@ -29,7 +29,7 @@ BYTE timeByteArr[4];
 int tempArr[100];
 int timeArr[100];
 Frame frame;
-volatile int sensorDataQuantity = 0;
+int sensorDataQuantity[1][1] = {0};
 extern int q = 5;
 int nones = 0;
 int main() {
@@ -45,16 +45,16 @@ int main() {
   delay(5000);
   int option = 0;
   while (true) {
-    printMenu(sensorDataQuantity, q);
-    getOptionAndValidate(&option, sensorDataQuantity, q);
+    printMenu(sensorDataQuantity[1], q);
+    getOptionAndValidate(&option, sensorDataQuantity[1], q);
     if (option == 1) {    
       readSensorData(q,tempArr, timeArr);
-      sensorDataQuantity +=q;
+      sensorDataQuantity[1] +=q;
     } else if (option ==2 ) {
       frame.cmd = 2;
       frame.length = 8;
       int i = 0;
-      while (i<sensorDataQuantity) {
+      while (i<q) {
         getByteArrayOfInteger(tempArr[i], tempByteArr);
         getByteArrayOfInteger(timeArr[i], timeByteArr);
         for (int i = 0; i<4; i++) {
