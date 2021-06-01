@@ -48,8 +48,8 @@ int main() {
       if (!transmissionStarted)
         printf("Waiting data ...\n");
       else
-        printf("Receiving data ...\n")
-          delay(1000);
+        printf("Receiving data ...\n");
+      delay(1000);
     }
     generateReceivedFrame(receivedFrame);
     if (receivedFrame.cmd == 4) {
