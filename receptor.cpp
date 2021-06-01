@@ -93,7 +93,7 @@ int main() {
       medianTemp = sum/dataQty;
       printf("Max Temp %.2f | Min Temp %.2f | Median Temp %.2f \n", maxTemp, minTemp, medianTemp );
     } else if (receivedFrame.cmd == 3) {
-      printf("Total messages received: %d | Errors found: %d | Received temp data %d\n",cmdReceived, errorCount, dataQtyy);
+      printf("Total messages received: %d | Errors found: %d | Received temp data %d\n",cmdReceived, errorCount, dataQty);
       printf("Max Temp %.2f | Min Temp %.2f | Median Temp %.2f \n", maxTemp, minTemp, medianTemp );
     }
     memset(&receivedFrame, 0, sizeof(receivedFrame));
