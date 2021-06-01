@@ -31,7 +31,8 @@ int minTemp = 0;
 
 bool parityError = 0;
 int errorCount = 0;
-
+bool parity = 0;
+int nones = 0;
 int main() {
   if (wiringPiSetup() == -1)
     exit(1);
