@@ -56,6 +56,8 @@ int main() {
       printf("An error was detected so ignoring message ...\n");
       parityError = false;
       errorCount++;
+      memset(&receivedFrame, 0, sizeof(receivedFrame));
+      nbytes = 0;
       continue;
     }
     generateReceivedFrame(receivedFrame);
