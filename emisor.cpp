@@ -89,6 +89,8 @@ int main() {
       printf("Sending data ...\n");
       delay(100);
     }
+    if (frame.cmd == 4)
+      exit(1);
     memset(&frame, 0, sizeof(frame));
   }
   return 0;

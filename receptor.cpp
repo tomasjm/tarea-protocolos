@@ -55,6 +55,7 @@ int main() {
     if (parityError) {
       printf("An error was detected so ignoring message ...\n");
       parityError = false;
+      errorCount++;
       continue;
     }
     generateReceivedFrame(receivedFrame);
