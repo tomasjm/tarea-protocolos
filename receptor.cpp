@@ -110,8 +110,8 @@ void processBit(bool level) {
   } else if (nbits == 9) {
     // check paridad
     parity = level;
-    nones = (frame.frame[nbytes]&0x01) + ((frame.frame[nbytes]&0x02)>>1) + ((frame.frame[nbytes]&0x04)>>2) + ((frame.frame[nbytes]&0x08)>>3)
-      + ((frame.frame[nbytes]&0x10)>>4) + ((frame.frame[nbytes]&0x20)>>5) + ((frame.frame[nbytes]&0x40)>>6) + ((frame.frame[nbytes]&0x80)>>7);
+    nones = (receivedFrame.frame[nbytes]&0x01) + ((receivedFrame.frame[nbytes]&0x02)>>1) + ((receivedFrame.frame[nbytes]&0x04)>>2) + ((receivedFrame.frame[nbytes]&0x08)>>3)
+      + ((receivedFrame.frame[nbytes]&0x10)>>4) + ((receivedFrame.frame[nbytes]&0x20)>>5) + ((receivedFrame.frame[nbytes]&0x40)>>6) + ((receivedFrame.frame[nbytes]&0x80)>>7);
     if(parity != (nones%2==0)){
       parityError = true;
     }
