@@ -52,16 +52,16 @@ int main() {
         printf("Receiving data ...\n");
       delay(1000);
     }
+    if (parityError) {
+      printf("An error was detected so ignoring message ...\n");
+      parityError = false;
+      continue;
+    }
     generateReceivedFrame(receivedFrame);
     if (receivedFrame.cmd == 4) {
       printf("Closing...\n");
       exit(1);
     } else if (receivedFrame.cmd == 2) {
-      if (parityError) {
-        errorCount++;
-        printf("An error was detected so message is ignored ...\n");
-        continue;
-      }
       for (int j = 0; j<4;j++) {
         tempByteArr[j] = receivedFrame.data[j];
         timeByteArr[j] = receivedFrame.data[j+4];

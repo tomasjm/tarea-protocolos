@@ -54,7 +54,7 @@ int main() {
       frame.cmd = 2;
       frame.length = 8;
       int i = 0;
-      while (i<q) {
+      while (i<sensorDataQuantity[0]) {
         getByteArrayOfInteger(tempArr[i], tempByteArr);
         getByteArrayOfInteger(timeArr[i], timeByteArr);
         for (int i = 0; i<4; i++) {
