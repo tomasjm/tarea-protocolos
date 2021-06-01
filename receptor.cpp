@@ -75,7 +75,7 @@ int main() {
       dataQty+=1;
       printf("Temp %.2f\n", tempArr[dataQty]);
       printf("Se han capturado %d datos\n", dataQty);
-      int sum = 0;
+      float sum = 0;
       for (int i=0; i<dataQty; i++) {
         if (i == 0)
           minTemp = tempArr[i];
