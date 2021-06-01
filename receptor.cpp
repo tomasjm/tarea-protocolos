@@ -20,19 +20,20 @@ volatile int nbytes = 0;
 bool transmissionStarted =false;
 bool start = true; 
 Frame receivedFrame;
-int tempArr[100];
+float tempArr[100];
 int timeArr[100];
 BYTE tempByteArr[4];
 BYTE timeByteArr[4];
 extern int dataQty = 0;
-int maxTemp = 0;
-int medianTemp = 0;
-int minTemp = 0;
+float maxTemp = 0;
+float medianTemp = 0;
+float minTemp = 0;
 
 bool parityError = 0;
 int errorCount = 0;
 bool parity = 0;
 int nones = 0;
+
 int main() {
   if (wiringPiSetup() == -1)
     exit(1);
@@ -69,10 +70,10 @@ int main() {
       int time = 0;
       getIntegerOfByteArray(tempByteArr, &temp);
       getIntegerOfByteArray(timeByteArr, &time);
-      tempArr[dataQty] = temp;
+      tempArr[dataQty] = ((float)temp-10)/100;
       timeArr[dataQty] = time;
       dataQty+=1;
-      printf("Temp %d\n", temp);
+      printf("Temp %.2f\n", tempArr[dataQty]);
       printf("Se han capturado %d datos\n", dataQty);
       int sum = 0;
       for (int i=0; i<dataQty; i++) {
@@ -85,10 +86,10 @@ int main() {
         sum += tempArr[i];
       }
       medianTemp = sum/dataQty;
-      printf("Max Temp %d | Min Temp %d | Median Temp %d \n", maxTemp, minTemp, medianTemp );
+      printf("Max Temp %.2f | Min Temp %.2f | Median Temp %.2f \n", maxTemp, minTemp, medianTemp );
     } else if (receivedFrame.cmd == 3) {
       printf("Received messages %d | Errors found %d \n", dataQty, errorCount);
-      printf("Max Temp %d | Min Temp %d | Median Temp %d \n", maxTemp, minTemp, medianTemp );
+      printf("Max Temp %.2f | Min Temp %.2f | Median Temp %.2f \n", maxTemp, minTemp, medianTemp );
     }
     memset(&receivedFrame, 0, sizeof(receivedFrame));
     nbytes = 0;
