@@ -49,12 +49,12 @@ int main() {
     getOptionAndValidate(&option, sensorDataQuantity[0], q);
     if (option == 1) {    
       readSensorData(q,tempArr, timeArr);
-      sensorDataQuantity[0] +=q;
+      sensorDataQuantity[0] =q;
     } else if (option ==2 ) {
       frame.cmd = 2;
       frame.length = 8;
       int i = 0;
-      while (i<sensorDataQuantity[0]) {
+      while (i<q) {
         getByteArrayOfInteger(tempArr[i], tempByteArr);
         getByteArrayOfInteger(timeArr[i], timeByteArr);
         for (int i = 0; i<4; i++) {
