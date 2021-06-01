@@ -103,9 +103,9 @@ void cb(void) {
   if (nbits < 9 && nbits != 0)
     digitalWrite(TX_PIN, (frame.frame[nbytes] >> (nbits-1)&0x1));
   if (nbits == 9) {
-    nones = (bytes[nbytes]&0x01) + ((bytes[nbytes]&0x02)>>1) + ((bytes[nbytes]&0x04)>>2) + 
-      ((bytes[nbytes]&0x08)>>3) + ((bytes[nbytes]&0x10)>>4) + ((bytes[nbytes]&0x20)>>5) + 
-      ((bytes[nbytes]&0x40)>>6) + ((bytes[nbytes]&0x80)>>7);
+    nones = (frame.frame[nbytes]&0x01) + ((frame.frame[nbytes]&0x02)>>1) + ((frame.frame[nbytes]&0x04)>>2) + 
+      ((frame.frame[nbytes]&0x08)>>3) + ((frame.frame[nbytes]&0x10)>>4) + ((frame.frame[nbytes]&0x20)>>5) + 
+      ((frame.frame[nbytes]&0x40)>>6) + ((frame.frame[nbytes]&0x80)>>7);
     digitalWrite(TX_PIN, nones%2==0); 
   }
   if (nbits > 9)
