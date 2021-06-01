@@ -70,7 +70,7 @@ int main() {
       int time = 0;
       getIntegerOfByteArray(tempByteArr, &temp);
       getIntegerOfByteArray(timeByteArr, &time);
-      tempArr[dataQty] = ((float)temp-10000)/100;
+      tempArr[dataQty] = ((float)temp-10000)/1000;
       timeArr[dataQty] = time;
       dataQty+=1;
       printf("Temp %.2f\n", tempArr[dataQty]);
