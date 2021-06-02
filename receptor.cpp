@@ -74,12 +74,12 @@ int main() {
         timeByteArr[j] = receivedFrame.data[j+4];
       }
       int temp = 0;
-      int time = 0;
+      int vTime = 0;
       getIntegerOfByteArray(tempByteArr, &temp);
-      getIntegerOfByteArray(timeByteArr, &time);
+      getIntegerOfByteArray(timeByteArr, &vTime);
       tempArr[dataQty] = ((float)temp-10000)/1000;
-      timeArr[dataQty] = time;
-      if (tempArr[dataQty] < -10.00 || tempArr[dataQty] > 55.00 || timeArr[dataQty] > time(NULL)) {
+      timeArr[dataQty] = vTime;
+      if (tempArr[dataQty] < -10.00 || tempArr[dataQty] > 55.00 || timeArr[dataQty] > (int)time(NULL)) {
         printf("An error was detected at value ranges of the data received, so ignoring data ...\n");
         errorRangeCount++;
         continue;
@@ -103,10 +103,9 @@ int main() {
       printf("Errors by parity check: %d | Errors by range check: %d\n", errorCount, errorRangeCount);
       printf("Values of temperature received without errors: %d\n", dataQty);
       printf("---- Percentages of messages received ----\n");
-      printf("Without error: %.3f\%   |   Parity error: %.3f\%   |   Range error: %.3f\%   \n", ((float)(cmdReceived-errorRangeCount-errorCount)/cmdReceived)*100, ((float)errorCount/cmdReceived)*100, ((float)errorRangeCount/cmdReceived)*100);
+      printf("Without error: %.3f%%   |   Parity error: %.3f%%   |   Range error: %.3f%%   \n", ((float)(cmdReceived-errorRangeCount-errorCount)/cmdReceived)*100, ((float)errorCount/cmdReceived)*100, ((float)errorRangeCount/cmdReceived)*100);
       printf("----- Values related to temperature ----\n");
       printf("Max Temp %.2f | Min Temp %.2f | Median Temp %.2f \n", maxTemp, minTemp, medianTemp );
-      printf("Percentages \n")
     }
     memset(&receivedFrame, 0, sizeof(receivedFrame));
     nbytes = 0;
