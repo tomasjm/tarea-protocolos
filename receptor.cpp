@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "protocol/protocol.h"
 #include "helpers/helpers.h"
 
@@ -34,6 +35,7 @@ bool parityError = 0;
 int errorCount = 0;
 bool parity = 0;
 int nones = 0;
+int errorRangeCount = 0;
 
 int main() {
   if (wiringPiSetup() == -1)
@@ -77,6 +79,11 @@ int main() {
       getIntegerOfByteArray(timeByteArr, &time);
       tempArr[dataQty] = ((float)temp-10000)/1000;
       timeArr[dataQty] = time;
+      if (tempArr[dataQty] < -10.00 || tempArr[dataQty] > 55.00 || timeArr[dataQty] > time(NULL)) {
+        printf("An error was detected at value ranges of the data received, so ignoring data ...\n");
+        errorRangeCount++;
+        continue;
+      }
       dataQty+=1;
       printf("Received %d values of temperature with it timestamp\n", dataQty);
       float sum = 0;
@@ -92,8 +99,14 @@ int main() {
       medianTemp = sum/dataQty;
       printf("Max Temp %.2f | Min Temp %.2f | Median Temp %.2f \n", maxTemp, minTemp, medianTemp );
     } else if (receivedFrame.cmd == 3) {
-      printf("Total messages received (CMDs): %d | Errors found: %d | Received temp data %d\n",cmdReceived, errorCount, dataQty);
+      printf("Total messages received (CMDs): %d | Total errors found: %d\n",cmdReceived, errorRangeCount + errorCount);
+      printf("Errors by parity check: %d | Errors by range check: %d\n", errorCount, errorRangeCount);
+      printf("Values of temperature received without errors: %d\n", dataQty);
+      printf("---- Percentages of messages received ----\n");
+      printf("Without error: %.3f\%   |   Parity error: %.3f\%   |   Range error: %.3f\%   \n", ((float)(cmdReceived-errorRangeCount-errorCount)/cmdReceived)*100, ((float)errorCount/cmdReceived)*100, ((float)errorRangeCount/cmdReceived)*100);
+      printf("----- Values related to temperature ----\n");
       printf("Max Temp %.2f | Min Temp %.2f | Median Temp %.2f \n", maxTemp, minTemp, medianTemp );
+      printf("Percentages \n")
     }
     memset(&receivedFrame, 0, sizeof(receivedFrame));
     nbytes = 0;
