@@ -58,7 +58,7 @@ int main() {
     }
     cmdReceived++;
     if (parityError) {
-      printf("An error was detected so ignoring message ...\n");
+      printf("An error was detected in parity bit so ignoring message ...\n");
       parityError = false;
       errorCount++;
       memset(&receivedFrame, 0, sizeof(receivedFrame));
